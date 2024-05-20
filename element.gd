@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed: int = 20
+var speed: int = 12
 var one_s: PackedScene
 var two_s: PackedScene
 var three_s: PackedScene
