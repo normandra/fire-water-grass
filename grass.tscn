@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj55xjl1rpa72"]
+
+[ext_resource type="Script" path="res://element.gd" id="1_as3xw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_318qa"]
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_3pems"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7g2yx"]
+albedo_color = Color(0.109804, 0.615686, 0.313726, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a6l33"]
+height = 0.5
+radius = 0.6
+
+[node name="Grass" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collision_layer = 8
+script = ExtResource("1_as3xw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_318qa")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_3pems")
+surface_material_override/0 = SubResource("StandardMaterial3D_7g2yx")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_a6l33")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
